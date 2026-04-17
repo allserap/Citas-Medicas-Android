@@ -2,12 +2,13 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
+    //id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.citas.medicas"
     compileSdk = 34
+    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         applicationId = "com.citas.medicas"
@@ -42,6 +43,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = false
         buildConfig = true
     }
 }
