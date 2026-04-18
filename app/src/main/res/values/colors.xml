@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="citas_primary">#2F4156</color>
+    <color name="citas_secondary">#A6BED1</color>
+    <color name="citas_background">#F8F9FA</color>
+    <color name="citas_white">#FFFFFF</color>
+    <color name="status_pending">#FFB300</color>
+    <color name="status_completed">#4CAF50</color>
+    <color name="status_canceled">#F44336</color>
 </resources>
