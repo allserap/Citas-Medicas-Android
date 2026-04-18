@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvUnidadContenedor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/citas_white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llCabeceraUnidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_icon_circle"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_dialog_map"
+                app:tint="@color/citas_primary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+                <TextView android:id="@+id/tvNombreItemMapa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hospital General ISSS" android:textColor="@color/citas_primary" android:textStyle="bold" android:textSize="16sp"/>
+                <TextView android:id="@+id/tvDireccionItemMapa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alameda Juan Pablo II, San Salvador" android:textColor="@color/citas_secondary" android:textSize="12sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivFlechaExpandir"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/arrow_down_float"
+                app:tint="@color/citas_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDetallesExpandibles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone"
+            tools:visibility="visible"> <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="12dp"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Especialidades disponibles:" android:textColor="@color/citas_primary" android:textSize="12sp" android:layout_marginBottom="8dp"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginBottom="16dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Medicina General" android:background="@drawable/bg_chip" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:textColor="@color/citas_primary" android:textSize="10sp" android:layout_marginEnd="6dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ginecología" android:background="@drawable/bg_chip" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:textColor="@color/citas_primary" android:textSize="10sp" android:layout_marginEnd="6dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Traumatología" android:background="@drawable/bg_chip" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:textColor="@color/citas_primary" android:textSize="10sp" android:layout_marginEnd="6dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Oftalmología" android:background="@drawable/bg_chip" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:textColor="@color/citas_primary" android:textSize="10sp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLlamarHospital"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:text="2231-5000"
+                    android:textColor="@color/citas_primary"
+                    app:icon="@android:drawable/ic_menu_call"
+                    app:iconTint="@color/citas_primary"
+                    app:backgroundTint="#F0F4F8" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnComoLlegar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:text="Cómo llegar"
+                    android:textColor="@color/citas_white"
+                    app:iconTint="@color/citas_white"
+                    app:backgroundTint="@color/citas_primary" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

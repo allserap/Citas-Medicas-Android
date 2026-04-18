@@ -12,11 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CitasMedicas">
         <activity
+            android:name=".ui.paciente.MapaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.paciente.PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.paciente.HistorialCitasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.paciente.SolicitarCitaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.paciente.HomePacienteActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
