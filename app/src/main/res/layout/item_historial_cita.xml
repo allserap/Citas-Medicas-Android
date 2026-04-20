@@ -37,8 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Confirmada"
-                android:textColor="#00ACC1"
-                android:background="#E0F7FA"
+                android:textColor="#ffffff"
+                android:background="@color/citas_primary"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
                 android:textSize="12sp"
@@ -69,8 +69,8 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
                 android:text="Cambiar"
-                android:textColor="#00ACC1"
-                app:backgroundTint="#E0F7FA" />
+                android:textColor="#ffff"
+                app:backgroundTint="@color/citas_primary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnHistorialCancelar"

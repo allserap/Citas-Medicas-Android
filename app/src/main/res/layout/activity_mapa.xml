@@ -151,6 +151,7 @@
         android:background="@color/citas_white"
         app:itemIconTint="@color/citas_primary"
         app:itemTextColor="@color/citas_primary"
+        app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

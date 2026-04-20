@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="← Atrás"
-            android:textColor="#0097A7"
+            android:textColor="@color/citas_primary"
             android:textSize="16sp"
             android:clickable="true"
             android:focusable="true"/>
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Historial de Citas"
-            android:textColor="#0097A7"
+            android:textColor="@color/citas_primary"
             android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center"/>
@@ -85,7 +85,7 @@
         android:text="+ Solicitar Nueva Cita"
         android:textColor="@color/citas_white"
         android:textStyle="bold"
-        app:backgroundTint="#26A69A"
+        app:backgroundTint="@color/citas_primary"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationHistorial"/>
 
@@ -94,6 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/citas_white"
+        app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/citas_primary"
         app:itemTextColor="@color/citas_primary"
         app:layout_constraintBottom_toBottomOf="parent"
