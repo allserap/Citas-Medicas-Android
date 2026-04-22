@@ -5,56 +5,61 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.citas.medicas.R
+import com.citas.medicas.databinding.FragmentRecetasBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RecetasFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class RecetasFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class RecetasFragment : Fragment(R.layout.fragment_recetas) {
+    // Inicializar el binding
+    private var _binding: FragmentRecetasBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentRecetasBinding.bind(view)
+
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        binding.btnGenerarReceta.setOnClickListener {
+            if (validarReceta()) {
+                Toast.makeText(requireContext(), "Receta generada con éxito", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.btnAgregarMedicamento.setOnClickListener {
+            agregarCampoMedicamento()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recetas, container, false)
+    private fun validarReceta(): Boolean {
+        with(binding) {
+            val diagnostico = etDiagnostico.text.toString().trim()
+            var isValid = true
+
+            if (diagnostico.isEmpty()) {
+                etDiagnostico.error = "El diagnóstico es requerido"
+                isValid = false
+            }
+
+            // Validar que el contenedor de medicamentos no esté vacío
+            if (containerMedicamentos.childCount == 0) {
+                Toast.makeText(requireContext(), "Debe agregar al menos un medicamento", Toast.LENGTH_SHORT).show()
+                isValid = false
+            }
+
+            return isValid
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecetasFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecetasFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun agregarCampoMedicamento() {
+        val viewMed = layoutInflater.inflate(R.layout.item_medicamento, binding.containerMedicamentos, false)
+        binding.containerMedicamentos.addView(viewMed)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

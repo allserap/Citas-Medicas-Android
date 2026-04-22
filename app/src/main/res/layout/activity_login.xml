@@ -72,7 +72,7 @@
             android:textColor="@color/citas_primary"/>
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etClave"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Ingrese su contraseña"
@@ -91,12 +91,15 @@
             android:backgroundTint="@color/citas_secondary"/>
 
         <TextView
+            android:id="@+id/tvIrARegistro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¿No tiene una cuenta? Regístrese aquí"
             android:textColor="@color/citas_primary"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
 </LinearLayout>

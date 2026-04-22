@@ -42,7 +42,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding = true //permite la relación xml con .kt
         dataBinding = false
         buildConfig = true
     }
