@@ -64,6 +64,7 @@
             android:weightSum="5">
 
             <LinearLayout
+                android:id="@+id/tabUsuarios"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,16 +75,18 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tabEstadisticas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📊" android:textSize="18sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Stats" android:textSize="10sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Estadísticas" android:textSize="10sp"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tabHorarios"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -94,16 +97,18 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tabAuditoria"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📈" android:textSize="18sp"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Logs" android:textSize="10sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Auditoría" android:textSize="10sp"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tabRecursos"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -114,102 +119,11 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/containerFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Gestión de Usuarios"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/citas_primary"/>
-
-            <Button
-                android:id="@+id/btnNuevoUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="+ Nuevo"
-                android:textAllCaps="false"
-                android:textColor="@color/citas_white"
-                android:backgroundTint="@color/citas_primary"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_tabs"
+            android:layout_height="0dp"
             android:layout_marginTop="12dp"
-            android:padding="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="DR"
-                android:gravity="center"
-                android:textColor="@color/citas_primary"
-                android:background="@drawable/bg_icon_circle"
-                android:layout_marginEnd="12dp"
-                android:textStyle="bold"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dr. Roberto Flores"
-                    android:textStyle="bold"
-                    android:textColor="@color/citas_primary"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Medicina General"
-                    android:textSize="12sp"
-                    android:textColor="@color/citas_primary"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Médico"
-                    android:textSize="11sp"
-                    android:background="@color/citas_secondary"
-                    android:textColor="@color/citas_white"
-                    android:paddingHorizontal="6dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Activo"
-                    android:textSize="12sp"
-                    android:textColor="@color/citas_primary"/>
-            </LinearLayout>
-        </LinearLayout>
-
+            android:layout_weight="1" />
     </LinearLayout>
 </ScrollView>
