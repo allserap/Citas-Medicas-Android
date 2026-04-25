@@ -27,6 +27,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvHeaderWelcome"
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/citas_primary"
@@ -102,18 +103,16 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
+
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_today"
-                            app:tint="@color/citas_primary" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Solicitar Cita"
-                            android:textColor="@color/citas_primary"
-                            android:textSize="12sp" />
+                            android:layout_width="48dp" android:layout_height="48dp"
+                            android:src="@drawable/calendario" /> <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Solicitar Cita"
+                        android:textColor="@color/citas_primary"
+                        android:textSize="12sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -135,19 +134,18 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
+
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_agenda"
-                            app:tint="@color/citas_primary" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Mis Citas"
-                            android:textColor="@color/citas_primary"
-                            android:textSize="12sp" />
+                            android:layout_width="48dp" android:layout_height="48dp"
+                            android:src="@drawable/citas" /> <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Mis Citas"
+                        android:textColor="@color/citas_primary"
+                        android:textSize="12sp" />
                     </LinearLayout>
+
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
@@ -176,19 +174,18 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
+
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_dialog_map"
-                            app:tint="@color/citas_primary" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Unidades"
-                            android:textColor="@color/citas_primary"
-                            android:textSize="12sp" />
+                            android:layout_width="48dp" android:layout_height="48dp"
+                            android:src="@drawable/unidades" /> <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Unidades"
+                        android:textColor="@color/citas_primary"
+                        android:textSize="12sp" />
                     </LinearLayout>
+
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -209,18 +206,16 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
+
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_myplaces"
-                            app:tint="@color/citas_primary" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Perfil"
-                            android:textColor="@color/citas_primary"
-                            android:textSize="12sp" />
+                            android:layout_width="48dp" android:layout_height="48dp"
+                            android:src="@drawable/perfil" /> <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Perfil"
+                        android:textColor="@color/citas_primary"
+                        android:textSize="12sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>

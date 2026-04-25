@@ -2,10 +2,15 @@ package com.citas.medicas.ui.paciente
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.citas.medicas.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 
 class HistorialCitasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +20,37 @@ class HistorialCitasActivity : AppCompatActivity() {
 
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationHistorial)
+
+
+//
+//        para ver datos de forma quemada, la ali me obligo
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayoutHistorial)
+        val proximas = findViewById<LinearLayout>(R.id.llProximasContainer)
+        val pasadas = findViewById<LinearLayout>(R.id.llPasadasContainer)
+        val btnNuevaCita = findViewById<Button>(R.id.btnNuevaCitaFlotante)
+
+
+        btnNuevaCita.setOnClickListener {
+            startActivity(Intent(this, SolicitarCitaActivity::class.java))
+        }
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> { // Próximas
+                        proximas.visibility = View.VISIBLE
+                        pasadas.visibility = View.GONE
+                    }
+                    1 -> { // Pasadas
+                        proximas.visibility = View.GONE
+                        pasadas.visibility = View.VISIBLE
+                    }
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
 
         bottomNav.selectedItemId = R.id.nav_historial
 
