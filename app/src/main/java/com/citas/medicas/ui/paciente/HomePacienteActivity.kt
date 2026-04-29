@@ -2,6 +2,7 @@ package com.citas.medicas.ui.paciente
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.citas.medicas.R
@@ -20,6 +21,12 @@ class HomePacienteActivity : AppCompatActivity() {
         val btnMisCitas = findViewById<MaterialCardView>(R.id.cvActionMisCitas)
         val btnUnidades = findViewById<MaterialCardView>(R.id.cvActionUnidades)
         val btnPerfil = findViewById<MaterialCardView>(R.id.cvActionPerfil)
+        val tvVerTodasCitas = findViewById<TextView>(R.id.tvVerTodasCitas)
+
+
+        tvVerTodasCitas.setOnClickListener {
+            startActivity(Intent(this, HistorialCitasActivity::class.java))
+        }
 
         btnSolicitar.setOnClickListener {
             startActivity(Intent(this, SolicitarCitaActivity::class.java))

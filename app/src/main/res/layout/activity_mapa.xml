@@ -138,8 +138,24 @@
                 android:id="@+id/rvListaUnidadesMapa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_unidad_mapa" />
+
+<!--            eliminar este linear por que es para datos quemados, solo usar el recycler, borrar el visibility del recycler de aqui arrriba-->
+            <LinearLayout
+                android:id="@+id/llMockUnidadesMapa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_unidad_mapa" />
+
+                <include layout="@layout/item_unidad_mapa" />
+
+                <include layout="@layout/item_unidad_mapa" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
