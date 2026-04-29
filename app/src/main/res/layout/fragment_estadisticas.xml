@@ -46,6 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/tvCompletadas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="939"
@@ -77,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/tvCanceladas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="144"
@@ -108,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/tvReprogramadas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="87"
@@ -198,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tvTotalCitas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Total de Citas: 1170"
@@ -205,6 +209,7 @@
                     android:textStyle="bold"
                     android:textSize="17sp"/>
                 <TextView
+                    android:id="@+id/tvPorcentajeCompletadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tasa de completitud: 80.3%"

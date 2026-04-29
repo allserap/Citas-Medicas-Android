@@ -2,13 +2,22 @@ package com.citas.medicas.ui.auth
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.citas.medicas.R
+import androidx.lifecycle.lifecycleScope
+import com.citas.medicas.data.RetrofitClient
 import com.citas.medicas.databinding.ActivityRegistroBinding
-import com.citas.medicas.ui.admin.DashboardAdminActivity
+import com.citas.medicas.models.RegistroRequest
+import kotlinx.coroutines.launch
 import java.util.*
 
 class RegistroActivity : AppCompatActivity() {
@@ -23,6 +32,7 @@ class RegistroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupListeners()
+        configurarSpinners()
     }
 
         private fun setupListeners() {
@@ -37,16 +47,68 @@ class RegistroActivity : AppCompatActivity() {
 
             binding.btnCrearCuenta.setOnClickListener {
                 if (validarForm()) {
-                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                    // Por el momento para visualizar el flujo de pantallas
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
+                    enviarRegistroAlServidor()
                 }
             }
         }
 
+    private fun enviarRegistroAlServidor() {
+        //recuperar inicial del género
+        val generoSeleccionado = binding.spGeneroR.selectedItem.toString()
+        val generoFinal = when(generoSeleccionado) {
+            "Masculino" -> "M"
+            "Femenino" -> "F"
+            else -> "O"
+        }
+        // Preparar los datos
+        val nuevoUsuario = RegistroRequest(
+            nombre = binding.etNombreR.text.toString().trim(),
+            apellido = binding.etApellidoR.text.toString().trim(),
+            dui = binding.etDuiR.text.toString().trim(),
+            email = binding.etCorreoR.text.toString().trim(),
+            password = binding.etClaveR.text.toString(),
+            telefono = binding.etTelefonoR.text.toString().trim(),
+            fechaNacimiento = binding.etFechaR.text.toString(),
+            numAfiliado = binding.etAfiliadoR.text.toString().trim(),
+            genero = generoFinal,
+            estadoFamiliar = binding.spEstadoFamiliarR.selectedItem.toString(),
+            rol = 1 // Rol de paciente
+        )
 
+        // Llamada asíncrona
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.apiService.registrarPaciente(nuevoUsuario)
 
+                if (response.isSuccessful && response.body()?.success == true) {
+                    Toast.makeText(
+                        this@RegistroActivity,
+                        "¡Cuenta creada! Inicia sesión",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    startActivity(Intent(this@RegistroActivity, LoginActivity::class.java))
+                    finish()
+                } else {
+                    // Si el servidor responde un error
+                    //val errorMsg = response.body()?.message ?: "Error en el registro"
+                    //Toast.makeText(this@RegistroActivity, errorMsg, Toast.LENGTH_SHORT).show()
+                        val errorString = response.errorBody()?.string()
+                        Log.e("API_ERROR", errorString ?: "Error desconocido")
+                        Toast.makeText(
+                            this@RegistroActivity,
+                            "Error: $errorString",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@RegistroActivity,
+                    "Error de red: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
     // Validar los datos ingrsados por el usuario
     fun validarForm(): Boolean {
 
@@ -133,6 +195,49 @@ class RegistroActivity : AppCompatActivity() {
         return phone.matches(regex)
     }
 
+    private fun configurarSpinners() {
+        val opcionesGenero = arrayOf("Masculino", "Femenino", "Otro")
+        configurarSpinnerConHint(binding.spGeneroR, opcionesGenero, "Seleccione su género")
+
+        val opcionesEstado = arrayOf("Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a")
+        configurarSpinnerConHint(binding.spEstadoFamiliarR, opcionesEstado, "Seleccione estado familiar")
+    }
+
+    private fun configurarSpinnerConHint(spinner: Spinner, opciones: Array<String>, hint: String) {
+        val listaConHint = arrayOf(hint) + opciones
+
+        val adapter = object : ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaConHint) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val tv = view as TextView
+                if (position == 0) {
+                    tv.setTextColor(Color.GRAY)
+                } else {
+                    tv.setTextColor(Color.BLACK)
+                }
+                return view
+            }
+
+            override fun isEnabled(position: Int): Boolean {
+                return position != 0 // Deshabilita la primera posición
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                val tv = view as TextView
+                if (position == 0) {
+                    tv.setTextColor(Color.GRAY)
+                } else {
+                    tv.setTextColor(Color.BLACK)
+                }
+                return view
+            }
+        }
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
     private fun showDatePickerDialog(editText: EditText) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -140,9 +245,13 @@ class RegistroActivity : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePicker = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-            val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-            editText.setText(date)
+            val realMonth = selectedMonth + 1
+            val formattedDate = String.format(Locale.US, "%04d-%02d-%02d", selectedYear, realMonth, selectedDay)
+
+            editText.setText(formattedDate)
         }, year, month, day)
+
+        datePicker.show()
 
         datePicker.show()
     }

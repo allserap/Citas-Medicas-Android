@@ -153,9 +153,37 @@
                 android:id="@+id/etFechaR"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="dd/mm/aaaa"
+                android:hint="aaaa-mm-dd"
                 android:background="@drawable/bg_input"
                 android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+                android:padding="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Género"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/citas_primary"/>
+
+            <Spinner
+                android:id="@+id/spGeneroR"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input"
+                android:padding="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado Familiar"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/citas_primary"/>
+
+            <Spinner
+                android:id="@+id/spEstadoFamiliarR"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input"
                 android:padding="12dp"/>
 
             <TextView

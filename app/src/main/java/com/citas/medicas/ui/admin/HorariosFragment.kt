@@ -30,7 +30,7 @@ class HorariosFragment : Fragment(R.layout.fragment_horarios) {
         setupDia(binding.itemSabado, "Sábado")
 
         // Guardar
-        binding.btnGuardar.setOnClickListener {
+        binding.btnGuardarHorario.setOnClickListener {
             guardarConfiguracion()
         }
     }

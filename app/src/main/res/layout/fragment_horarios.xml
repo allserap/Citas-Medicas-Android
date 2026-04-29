@@ -68,6 +68,7 @@
                         android:paddingVertical="8dp"
                         android:alpha="0.6">
                         <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchDomingo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -125,12 +126,36 @@
                         app:cardBackgroundColor="#FFFAEB"
                         app:strokeWidth="1dp"
                         app:strokeColor="#FEF0C7">
-                        <RelativeLayout android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-                            <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true">
-                                <TextView android:text="Turno de Emergencias" android:textColor="#B54708" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                                <TextView android:text="24/7 disponible" android:textColor="#B54708" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <RelativeLayout
+                            android:padding="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true">
+                                <TextView
+                                    android:text="Turno de Emergencias"
+                                    android:textColor="#B54708"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="24/7 disponible"
+                                    android:textColor="#B54708"
+                                    android:textSize="12sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
                             </LinearLayout>
-                            <com.google.android.material.switchmaterial.SwitchMaterial android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" app:thumbTint="@color/citas_primary"
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchEmergencia"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                app:thumbTint="@color/citas_primary"
                                 app:trackTint="@color/citas_secondary"/>
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -143,12 +168,35 @@
                         app:cardBackgroundColor="#F0F9FF"
                         app:strokeWidth="1dp"
                         app:strokeColor="#B9E6FE">
-                        <RelativeLayout android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-                            <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true">
-                                <TextView android:text="Turno Nocturno" android:textColor="#026AA2" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                                <TextView android:text="17:00 - 07:00" android:textColor="#026AA2" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <RelativeLayout
+                            android:padding="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true">
+                                <TextView
+                                    android:text="Turno Nocturno"
+                                    android:textColor="#026AA2"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="17:00 - 07:00"
+                                    android:textColor="#026AA2"
+                                    android:textSize="12sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
                             </LinearLayout>
-                            <com.google.android.material.switchmaterial.SwitchMaterial android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" app:thumbTint="@color/citas_primary"
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchNocturno"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:thumbTint="@color/citas_primary"
                                 app:trackTint="@color/citas_secondary"/>
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -156,7 +204,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGuardar"
+                android:id="@+id/btnGuardarHorario"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
                 android:text="Guardar Cambios"

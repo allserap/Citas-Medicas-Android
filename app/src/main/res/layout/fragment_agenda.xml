@@ -50,6 +50,7 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/tvIniciales"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="12dp"
@@ -66,6 +67,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvNombrePaciente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="María García López"
@@ -73,6 +75,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvTipoCita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Consulta General"
@@ -94,6 +97,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvEstadoCita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/status_completed"

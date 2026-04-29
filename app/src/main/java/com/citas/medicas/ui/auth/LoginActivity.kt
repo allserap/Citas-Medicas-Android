@@ -2,59 +2,100 @@ package com.citas.medicas.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.citas.medicas.R
+import androidx.lifecycle.lifecycleScope
+import com.citas.medicas.data.RetrofitClient
+import com.citas.medicas.databinding.ActivityLoginBinding
+import com.citas.medicas.models.LoginRequest
 import com.citas.medicas.ui.admin.DashboardAdminActivity
 import com.citas.medicas.ui.medico.DashboardMedicoActivity
 import com.citas.medicas.ui.paciente.HomePacienteActivity
+import com.citas.medicas.utils.RolesUsuario
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
+    private var idRol: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        //inicializar binding
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val etAfiliado = findViewById<EditText>(R.id.etAfiliado)
-        val etClave = findViewById<EditText>(R.id.etClave)
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val tvIrARegistro = findViewById<TextView>(R.id.tvIrARegistro)
+        //Recuperar rol del splash
+        idRol = intent.getIntExtra("rol", RolesUsuario.PACIENTE)
 
-        tvIrARegistro.setOnClickListener {
+        interfazPorRol()
+        setupListeners()
+
+    }
+
+    private fun setupListeners() {
+        binding.tvIrARegistro.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
         }
 
-        btnLogin.setOnClickListener {
-            val afiliado = etAfiliado.text.toString()
-            val pass = etClave.text.toString()
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etAfiliado.text.toString()
+            val pass = binding.etClave.text.toString()
 
-            if (afiliado.isEmpty() || pass.isEmpty()) {
+            if (email.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show()
+            }else{
+                ejecutarLogin(email, pass)
             }
-                // Por el momento para visualizar el flujo de pantallas
-                validarAcceso(afiliado, pass)
         }
     }
-    private fun validarAcceso(user: String, pass: String) {
-        when {
-            user == "admin" && pass == "1234" -> {
-                navegarA(DashboardAdminActivity::class.java, "Bienvenido Administrador")
-            }
-            user == "medico" && pass == "1234" -> {
-                navegarA(DashboardMedicoActivity::class.java, "Bienvenido Dr. Roberto")
-            }
-            user == "paciente" && pass == "1234" -> {
-                navegarA(HomePacienteActivity::class.java, "Bienvenido Paciente")
-                Toast.makeText(this, "Dashboard Paciente en desarrollo", Toast.LENGTH_SHORT).show()
-            }
-            else -> {
-                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+
+    //Login segun rol
+    private fun interfazPorRol(){
+        when(idRol){
+            RolesUsuario.PACIENTE -> binding.tvIdentificador.text = "Número de Afiliado"
+            RolesUsuario.MEDICO -> binding.tvIdentificador.text = "JVPM"
+            else -> binding.tvIdentificador.text = "Identificador"
+        }
+    }
+
+    private fun ejecutarLogin(usuario: String, clave: String) {
+        val request = LoginRequest(usuario, clave, idRol)
+
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.apiService.loginUsuario(request)
+
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val loginResponse = response.body()!!
+                    val user = loginResponse.data
+
+                    // --- PERSISTENCIA DE DATOS ---
+                    val prefs = getSharedPreferences("CitasMedicasPrefs", MODE_PRIVATE)
+                    with(prefs.edit()) {
+                        putString("user_id", user?.id)
+                        putString("user_nombre", user?.nombre)
+                        putInt("user_rol", idRol)
+                        apply()
+                    }
+
+                    val nombreUsuario = user?.nombre ?: "Usuario"
+                        when (idRol) {
+                            RolesUsuario.PACIENTE -> navegarA(HomePacienteActivity::class.java, "Bienvenido $nombreUsuario")
+                            RolesUsuario.MEDICO -> navegarA(DashboardMedicoActivity::class.java, "Bienvenido Dr. $nombreUsuario")
+                            //RolesUsuario.ADMIN -> navegarA(DashboardAdminActivity::class.java, "Panel Admin")
+                        }
+                    finish()
+                    } else {
+                    val errorMsg = response.errorBody()?.string() ?: "Credenciales incorrectas"
+                    Toast.makeText(this@LoginActivity, errorMsg, Toast.LENGTH_SHORT).show()
+                }
+
+
+            } catch (e: Exception) {
+                Log.e("LOGIN_ERROR", "Fallo: ${e.message}")
+                Toast.makeText(this@LoginActivity, "Error de red: Verifique su conexión", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -62,9 +103,11 @@ class LoginActivity : AppCompatActivity() {
     // Función auxiliar
     private fun navegarA(destino: Class<*>, mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, destino)
+        val intent = Intent(this, destino).apply {
+            // "matar" el Login para que no se pueda volver atrás
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
         startActivity(intent)
-        finish()
     }
 
 }

@@ -15,7 +15,6 @@ import com.citas.medicas.databinding.ActivityDashboardMedicoBinding
 import com.citas.medicas.ui.auth.LoginActivity
 import com.citas.medicas.ui.auth.RegistroActivity
 import com.citas.medicas.ui.medico.AgendaFragment
-import com.citas.medicas.ui.medico.EstadoFragment
 import com.citas.medicas.ui.medico.HistorialFragment
 import com.citas.medicas.ui.medico.RecetasFragment
 

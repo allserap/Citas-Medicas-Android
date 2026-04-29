@@ -11,7 +11,6 @@ import com.citas.medicas.databinding.FragmentAgendaBinding
 class AgendaFragment : Fragment(R.layout.fragment_agenda) {
     // Inicializar el binding
     private var _binding: FragmentAgendaBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

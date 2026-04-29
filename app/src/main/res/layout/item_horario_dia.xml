@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:checked="true"
         app:thumbTint="@color/citas_primary"
-        app:trackTint="#D1D1D6"/>
+        app:trackTint="@color/citas_secondary"/>
 
     <TextView
         android:id="@+id/tvNombreDia"
