@@ -2,6 +2,7 @@ package com.citas.medicas.ui.paciente
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.citas.medicas.R
@@ -14,6 +15,7 @@ class PerfilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_perfil)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationPerfil)
+        val btnEditarPerfil = findViewById<Button>(R.id.btnEditarPerfil)
 
         bottomNav.selectedItemId = R.id.nav_perfil
 
@@ -48,6 +50,10 @@ class PerfilActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+
+        btnEditarPerfil.setOnClickListener {
+            startActivity(Intent(this, EditarPerfilActivity::class.java))
         }
     }
 }
