@@ -35,13 +35,7 @@ class RecetasFragment : Fragment(R.layout.fragment_recetas) {
 
     private fun validarReceta(): Boolean {
         with(binding) {
-            val diagnostico = etDiagnostico.text.toString().trim()
             var isValid = true
-
-            if (diagnostico.isEmpty()) {
-                etDiagnostico.error = "El diagnóstico es requerido"
-                isValid = false
-            }
 
             // Validar que el contenedor de medicamentos no esté vacío
             if (containerMedicamentos.childCount == 0) {

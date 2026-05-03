@@ -6,20 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.citas.medicas.R
-import com.citas.medicas.databinding.FragmentAgendaBinding
-import com.citas.medicas.databinding.FragmentRecursosBinding
+import com.citas.medicas.databinding.FragmentGestionMedicamentosBinding
 
-
-class RecursosFragment : Fragment(R.layout.fragment_recursos) {
-
+class GestionMedicamentosFragment : Fragment(R.layout.fragment_gestion_medicamentos) {
     // Inicializar el binding
-    private var _binding: FragmentRecursosBinding? = null
+    private var _binding: FragmentGestionMedicamentosBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentRecursosBinding.bind(view)
-
+        _binding = FragmentGestionMedicamentosBinding.bind(view)
     }
 
 }

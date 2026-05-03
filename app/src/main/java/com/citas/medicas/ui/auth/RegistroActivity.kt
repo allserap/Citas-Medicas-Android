@@ -12,17 +12,18 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.citas.medicas.data.RetrofitClient
 import com.citas.medicas.databinding.ActivityRegistroBinding
 import com.citas.medicas.models.RegistroRequest
-import kotlinx.coroutines.launch
+import com.citas.medicas.utils.RolesUsuario
 import java.util.*
 
 class RegistroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegistroBinding
+    // Inicialización del ViewModel
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class RegistroActivity : AppCompatActivity() {
         // Uso de binding.root en lugar de R.layout
         setContentView(binding.root)
 
+        setupObservers()
         setupListeners()
         configurarSpinners()
     }
@@ -72,41 +74,21 @@ class RegistroActivity : AppCompatActivity() {
             numAfiliado = binding.etAfiliadoR.text.toString().trim(),
             genero = generoFinal,
             estadoFamiliar = binding.spEstadoFamiliarR.selectedItem.toString(),
-            rol = 1 // Rol de paciente
+            rol = RolesUsuario.PACIENTE
         )
+        authViewModel.ejecutarRegistro(nuevoUsuario)
+    }
+    private fun setupObservers() {
+        // Escuchar el éxito
+        authViewModel.registroExitoso.observe(this) { mensaje ->
+            Toast.makeText(this, mensaje ?: "¡Cuenta creada con éxito!", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
-        // Llamada asíncrona
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitClient.apiService.registrarPaciente(nuevoUsuario)
-
-                if (response.isSuccessful && response.body()?.success == true) {
-                    Toast.makeText(
-                        this@RegistroActivity,
-                        "¡Cuenta creada! Inicia sesión",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    startActivity(Intent(this@RegistroActivity, LoginActivity::class.java))
-                    finish()
-                } else {
-                    // Si el servidor responde un error
-                    //val errorMsg = response.body()?.message ?: "Error en el registro"
-                    //Toast.makeText(this@RegistroActivity, errorMsg, Toast.LENGTH_SHORT).show()
-                        val errorString = response.errorBody()?.string()
-                        Log.e("API_ERROR", errorString ?: "Error desconocido")
-                        Toast.makeText(
-                            this@RegistroActivity,
-                            "Error: $errorString",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                }
-            } catch (e: Exception) {
-                Toast.makeText(
-                    this@RegistroActivity,
-                    "Error de red: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        // Escuchar el error
+        authViewModel.error.observe(this) { errorMsg ->
+            Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
         }
     }
     // Validar los datos ingrsados por el usuario

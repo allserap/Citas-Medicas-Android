@@ -18,38 +18,42 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:text="Generar Receta"
+                android:textColor="@color/citas_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Generar Receta"
-                    android:textColor="@color/citas_primary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+            <Button
+                android:id="@+id/btnGenerarReceta"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/citas_primary"
+                android:text="Editar Historial"
+                android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Seleccionar Paciente"
-                    android:textColor="@color/citas_primary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Seleccionar Paciente"
+                android:textColor="@color/citas_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/spPaciente"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_input"
-                    android:popupBackground="@color/citas_background" />
-            </LinearLayout>
+            <Spinner
+                android:id="@+id/spPaciente"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:popupBackground="@color/citas_background" />
 
+            <!-- Sección de Medicamentos e Instrucciones -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,28 +62,9 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Diagnóstico"
-                    android:textColor="@color/citas_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etDiagnostico"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_input"
-                    android:hint="Ej: Infección respiratoria aguda"
-                    android:paddingHorizontal="12dp"
-                    android:textSize="14sp" />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -93,10 +78,10 @@
                     <Button
                         android:id="@+id/btnAgregarMedicamento"
                         style="?attr/materialButtonOutlinedStyle"
-                        android:backgroundTint="@color/citas_secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:backgroundTint="@color/citas_secondary"
                         android:text="+ Agregar"
                         android:textAllCaps="false"
                         android:textColor="@color/citas_primary" />
@@ -124,14 +109,13 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <EditText
-                                android:id="@+id/etNombreMedicamento"
+                            <Spinner
+                                android:id="@+id/spMedicamento"
                                 android:layout_width="match_parent"
-                                android:layout_height="40dp"
+                                android:layout_height="48dp"
+                                android:layout_marginTop="8dp"
                                 android:background="@drawable/bg_input"
-                                android:hint="Nombre del Medicamento"
-                                android:paddingHorizontal="10dp"
-                                android:textSize="14sp" />
+                                android:popupBackground="@color/citas_background" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -194,19 +178,18 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/btnGenerarReceta"
+                    android:id="@+id/btnEnviarReceta"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="16dp"
                     android:backgroundTint="@color/citas_secondary"
-                    android:text="Enviar Receta"
+                    android:text="Enviar"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
                     app:cornerRadius="12dp" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -31,7 +31,9 @@ class UsuariosAdapter(private var usuarios: List<Usuario>) :
             // Asignar textos
             tvNombre.text = usuario.nombre
             tvEspecialidad.text = usuario.especialidad
+
             tvRolBadge.text = usuario.rol
+
 
             // Tomar las primeras letras
             val palabras = usuario.nombre.split(" ")
@@ -50,29 +52,6 @@ class UsuariosAdapter(private var usuarios: List<Usuario>) :
                 tvRolBadge.setTextColor(ContextCompat.getColor(context, R.color.citas_white))
             }
 
-            // Manejo del Switch y Estado Visual
-            switchEstado.setOnCheckedChangeListener(null)
-            switchEstado.isChecked = usuario.estaActivo
-            actualizarInterfazEstado(holder, usuario.estaActivo)
-
-            switchEstado.setOnCheckedChangeListener { _, isChecked ->
-                usuario.estaActivo = isChecked
-                actualizarInterfazEstado(holder, isChecked)
-            }
-        }
-    }
-
-    private fun actualizarInterfazEstado(holder: UsuarioViewHolder, activo: Boolean) {
-        with(holder.binding) {
-            if (activo) {
-                tvEstadoTexto.text = "Activo"
-                root.alpha = 1.0f
-                tvEstadoTexto.setTextColor(ContextCompat.getColor(root.context, android.R.color.darker_gray))
-            } else {
-                tvEstadoTexto.text = "Suspendido"
-                root.alpha = 0.6f // Efecto de deshabilitado
-                tvEstadoTexto.setTextColor(ContextCompat.getColor(root.context, android.R.color.holo_red_dark))
-            }
         }
     }
 

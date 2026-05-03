@@ -61,6 +61,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun ejecutarLogin(usuario: String, clave: String) {
+        //temporal
+        when {
+            usuario == "admin@citas.com" && clave == "admin123" -> {
+                persistirYNAvegar("admin_01", "Administrador", RolesUsuario.ADMIN, DashboardAdminActivity::class.java)
+                return
+            }
+            usuario == "medico@citas.com" && clave == "medico123" -> {
+                persistirYNAvegar("med_01", "Roberto Flores", RolesUsuario.MEDICO, DashboardMedicoActivity::class.java)
+                return
+            }
+        }
+
         val request = LoginRequest(usuario, clave, idRol)
 
         lifecycleScope.launch {
@@ -83,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
                     val nombreUsuario = user?.nombre ?: "Usuario"
                         when (idRol) {
                             RolesUsuario.PACIENTE -> navegarA(HomePacienteActivity::class.java, "Bienvenido $nombreUsuario")
-                            RolesUsuario.MEDICO -> navegarA(DashboardMedicoActivity::class.java, "Bienvenido Dr. $nombreUsuario")
+                           //RolesUsuario.MEDICO -> navegarA(DashboardMedicoActivity::class.java, "Bienvenido Dr. $nombreUsuario")
                             //RolesUsuario.ADMIN -> navegarA(DashboardAdminActivity::class.java, "Panel Admin")
                         }
                     finish()
@@ -98,6 +110,23 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Error de red: Verifique su conexión", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    //temporal
+    private fun persistirYNAvegar(id: String, nombre: String, rol: Int, destino: Class<*>) {
+        // Persistencia
+        val prefs = getSharedPreferences("CitasMedicasPrefs", MODE_PRIVATE)
+        with(prefs.edit()) {
+            putString("user_id", id)
+            putString("user_nombre", nombre)
+            putInt("user_rol", rol)
+            apply()
+        }
+
+        // Navegación
+        val mensaje = if (rol == RolesUsuario.MEDICO) "Bienvenido Dr. $nombre" else "Bienvenido $nombre"
+        navegarA(destino, mensaje)
+        finish()
     }
 
     // Función auxiliar

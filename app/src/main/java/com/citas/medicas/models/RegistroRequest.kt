@@ -8,6 +8,8 @@ data class RegistroRequest(
     val dui: String,
     val genero: String,
     val telefono: String? = null,
+    val especialidad: Int? = null, // Solo se enviará si es Médico
+    val unidadMedica: Int? = null, // Solo se enviará si es Médico
     @SerializedName("email")
     val email: String,
     @SerializedName("password")
@@ -17,8 +19,9 @@ data class RegistroRequest(
     @SerializedName("fechaNacimiento")
     val fechaNacimiento: String,
     @SerializedName("estadoFamiliar")
-    val estadoFamiliar: String, // Solo se enviará si es Paciente
+    val estadoFamiliar: String? = null, // Solo se enviará si es Paciente
     @SerializedName("numAfiliado")
-    val numAfiliado: String, // Solo se enviará si es Paciente
-    val jvpm: String? = null      // Solo se enviará si es Médico
+    val numAfiliado: String? = null , // Solo se enviará si es Paciente
+    @SerializedName("numJvpm")
+    val numJvpm: String? = null      // Solo se enviará si es Médico
 )

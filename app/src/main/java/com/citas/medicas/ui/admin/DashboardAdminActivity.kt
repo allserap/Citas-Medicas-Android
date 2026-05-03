@@ -49,11 +49,8 @@ class DashboardAdminActivity : AppCompatActivity() {
             tabHorarios.setOnClickListener {
                 replaceFragment(HorariosFragment())
             }
-            tabAuditoria.setOnClickListener {
-                replaceFragment(AuditoriaFragment())
-            }
-            tabRecursos.setOnClickListener {
-                replaceFragment(RecursosFragment())
+            tabGestiones.setOnClickListener {
+                replaceFragment(GestionesFragment())
             }
 
             btnSalir.setOnClickListener {

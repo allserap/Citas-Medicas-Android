@@ -68,13 +68,52 @@
                     android:padding="20dp">
 
                     <EditText
-                        android:id="@+id/etNombre"
+                        android:id="@+id/etNombres"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:hint="Nombre completo"
+                        android:hint="Nombres"
                         android:background="@drawable/bg_input"
                         android:paddingHorizontal="16dp"
                         android:textSize="14sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/etApellidos"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Apellidos"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <Spinner
+                        android:id="@+id/spGenero"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/etFechaNac"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Fecha de Nacimiento"
+                        android:textSize="14sp"
+                        android:background="@drawable/bg_input"
+                        android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+                        android:paddingHorizontal="16dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/etDui"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="00000000-0"
+                        android:textSize="14sp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
                         android:layout_marginBottom="12dp"/>
 
                     <EditText
@@ -88,22 +127,45 @@
                         android:textSize="14sp"
                         android:layout_marginBottom="12dp"/>
 
-                    <Spinner
-                        android:id="@+id/spRol"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="12dp"
-                        android:background="@drawable/bg_input"/>
-
                     <EditText
-                        android:id="@+id/etEspecialidad"
+                        android:id="@+id/etTelefono"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:hint="Especialidad"
+                        android:hint="Teléfono"
+                        android:inputType="textEmailAddress"
                         android:background="@drawable/bg_input"
                         android:paddingHorizontal="16dp"
                         android:textSize="14sp"
-                        android:layout_marginBottom="20dp"/>
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:inputType="textPassword"
+                        android:hint="Contraseña"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/etJvpm"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Número de JVPM"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <Spinner
+                        android:id="@+id/spnEspecialidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingHorizontal="16dp"
+                        android:layout_marginBottom="12dp"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCrear"

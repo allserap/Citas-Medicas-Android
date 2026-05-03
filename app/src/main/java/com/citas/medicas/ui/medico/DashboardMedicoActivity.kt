@@ -42,6 +42,9 @@ class DashboardMedicoActivity : AppCompatActivity() {
                     tabRecetas.setOnClickListener {
                         replaceFragment(RecetasFragment())
                     }
+                    tabPerfil.setOnClickListener {
+                        replaceFragment(PerfilMedicoFragment())
+                    }
                     btnSalir.setOnClickListener {
                         Toast.makeText(
                             this@DashboardMedicoActivity,

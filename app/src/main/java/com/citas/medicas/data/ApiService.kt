@@ -15,6 +15,6 @@ interface ApiService {
     @POST("auth/register/paciente")
     suspend fun registrarPaciente(@Body request: RegistroRequest): Response<RegistroResponse>
 
-    //@POST("auth/register/medico")
-    //suspend fun registrarMedico(@Body request: RegistroRequest): Response<LoginResponse>
+    @POST("auth/register/medico")
+    suspend fun registrarMedico(@Body request: RegistroRequest): Response<LoginResponse>
 }

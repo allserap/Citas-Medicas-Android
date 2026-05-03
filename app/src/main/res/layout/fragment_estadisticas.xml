@@ -23,12 +23,35 @@
             android:layout_marginBottom="20dp"
             android:layout_marginStart="4dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="Seleccionar Unidad"
+            android:textColor="@color/citas_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spUnidades"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/bg_input"
+            android:padding="8dp"
+            android:popupBackground="@color/citas_background" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="16dp"
             android:baselineAligned="false"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:padding="8dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"

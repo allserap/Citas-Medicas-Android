@@ -76,33 +76,5 @@
                 android:backgroundTint="#E0EAFF"
                 android:textColor="#3538CD"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lytEstado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switchEstado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                app:thumbTint="@color/citas_primary"
-                app:trackTint="@color/citas_secondary"/>
-
-            <TextView
-                android:id="@+id/tvEstadoTexto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Activo"
-                android:textColor="#6A6A80"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
