@@ -9,6 +9,15 @@ import com.citas.medicas.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
+import android.util.Log
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.citas.medicas.data.RetrofitClient
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 class HomePacienteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,5 +75,64 @@ class HomePacienteActivity : AppCompatActivity() {
             }
         }
 
+        cargarCitasDesdeApi()
+
+    }
+
+
+    private fun cargarCitasDesdeApi() {
+        // datos guardados  en el LoginActivity
+        val prefs = getSharedPreferences("CitasMedicasPrefs", MODE_PRIVATE)
+        val nombreUsuario = prefs.getString("user_nombre", "Paciente")
+        val numAfiliado = prefs.getString("user_afiliado", "No disponible")
+
+        findViewById<TextView>(R.id.tvUserName).text = nombreUsuario
+        findViewById<TextView>(R.id.tvUserAffiliate).text = "Afiliado: $numAfiliado"
+
+        val pacienteIdId = 1 // Cámbialo por prefs.getInt("paciente_id", 1) cuando lo guardes en Login
+
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.apiService.getProximasCitas(pacienteIdId)
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+
+                    if (body != null && body.exito && body.datos.isNotEmpty()) {
+
+                        val container = findViewById<LinearLayout>(R.id.llUpcomingAppointmentsContainer)
+                        container.removeAllViews()
+
+                        for (cita in body.datos) {
+                            val view = layoutInflater.inflate(R.layout.item_cita_home, container, false)
+
+                            view.findViewById<TextView>(R.id.tvApptType).text = cita.especialidades
+                            view.findViewById<TextView>(R.id.tvApptTime).text = cita.hora_asignada
+                            view.findViewById<TextView>(R.id.tvApptLocation).text = cita.unidades_medicas
+                            view.findViewById<TextView>(R.id.tvApptDoctor).text = cita.doctor
+
+                            try {
+                                val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                                val formatter = SimpleDateFormat("dd MMM yyyy", Locale("es", "ES"))
+                                val date = parser.parse(cita.fecha_solicitada ?: "")
+                                view.findViewById<TextView>(R.id.tvApptDate).text = formatter.format(date!!)
+                            } catch (e: Exception) {
+                                view.findViewById<TextView>(R.id.tvApptDate).text = cita.fecha_solicitada
+                            }
+
+                            container.addView(view)
+                        }
+
+                    } else {
+                        Toast.makeText(this@HomePacienteActivity, "No tienes citas próximas", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@HomePacienteActivity, "Error del servidor: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error de conexión", e)
+                Toast.makeText(this@HomePacienteActivity, "Error al conectar con la API", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

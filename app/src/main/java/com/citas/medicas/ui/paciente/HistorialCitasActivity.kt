@@ -2,16 +2,27 @@ package com.citas.medicas.ui.paciente
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.citas.medicas.R
+import com.citas.medicas.data.RetrofitClient
+import com.citas.medicas.models.CitaHistorial
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.launch
 
+private var listaProximas = listOf<CitaHistorial>()
+private var listaPasadas = listOf<CitaHistorial>()
+
+private lateinit var adapter: HistorialAdapter
 class HistorialCitasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,32 +30,18 @@ class HistorialCitasActivity : AppCompatActivity() {
         setContentView(R.layout.activity_historial_citas)
 
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationHistorial)
 
+        val rvHistorial = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvHistorialCitas)
+        rvHistorial.layoutManager = LinearLayoutManager(this)
+        adapter = HistorialAdapter(emptyList())
+        rvHistorial.adapter = adapter
 
-//
-//        para ver datos de forma quemada, la ali me obligo
         val tabLayout = findViewById<TabLayout>(R.id.tabLayoutHistorial)
-        val proximas = findViewById<LinearLayout>(R.id.llProximasContainer)
-        val pasadas = findViewById<LinearLayout>(R.id.llPasadasContainer)
-        val btnNuevaCita = findViewById<Button>(R.id.btnNuevaCitaFlotante)
-
-
-        btnNuevaCita.setOnClickListener {
-            startActivity(Intent(this, SolicitarCitaActivity::class.java))
-        }
-
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> { // Próximas
-                        proximas.visibility = View.VISIBLE
-                        pasadas.visibility = View.GONE
-                    }
-                    1 -> { // Pasadas
-                        proximas.visibility = View.GONE
-                        pasadas.visibility = View.VISIBLE
-                    }
+                    0 -> adapter.actualizarDatos(listaProximas) // Clic en Próximas
+                    1 -> adapter.actualizarDatos(listaPasadas)  // Clic en Pasadas
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -52,6 +49,7 @@ class HistorialCitasActivity : AppCompatActivity() {
         })
 
 
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationHistorial)
         bottomNav.selectedItemId = R.id.nav_historial
 
         bottomNav.setOnItemSelectedListener { item ->
@@ -87,5 +85,40 @@ class HistorialCitasActivity : AppCompatActivity() {
             }
         }
 
+        cargarHistorial();
+
     }
+
+    private fun cargarHistorial() {
+        val prefs = getSharedPreferences("CitasMedicasPrefs", MODE_PRIVATE)
+        val pacienteIdId = 1 // Reemplazar por: prefs.getInt("user_id_numerico", 1)
+
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.apiService.getHistorialCitas(pacienteIdId)
+
+                if (response.isSuccessful && response.body()?.exito == true) {
+                    val datos = response.body()?.datos
+
+                    if (datos != null) {
+                        listaProximas = datos.proximas
+                        listaPasadas = datos.pasadas
+
+                        val tabLayout = findViewById<TabLayout>(R.id.tabLayoutHistorial)
+                        tabLayout.getTabAt(0)?.text = "📅 Próximas (${listaProximas.size})"
+                        tabLayout.getTabAt(1)?.text = "✓ Pasadas (${listaPasadas.size})"
+
+                        // Por defecto, mostramos las próximas al entrar
+                        adapter.actualizarDatos(listaProximas)
+                    }
+                } else {
+                    Toast.makeText(this@HistorialCitasActivity, "Error al cargar historial", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error: ${e.message}")
+                Toast.makeText(this@HistorialCitasActivity, "Error de red", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 }

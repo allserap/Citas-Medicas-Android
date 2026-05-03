@@ -1,0 +1,97 @@
+package com.citas.medicas.models
+
+import com.google.gson.annotations.SerializedName
+
+data class ApiResponseProximasCitas(
+    val exito: Boolean,
+    val datos: List<ProximaCita>,
+    val mensaje: String?
+)
+
+data class ProximaCita(
+    val id: String,
+    val especialidades: String?,
+    val fecha_solicitada: String?,
+    val hora_asignada: String?,
+    val unidades_medicas: String?,
+    val doctor: String?
+)
+
+data class ApiResponseHistorial(
+    val exito: Boolean,
+    val datos: DatosHistorial
+)
+
+data class DatosHistorial(
+    val proximas: List<CitaHistorial>,
+    val pasadas: List<CitaHistorial>
+)
+
+data class CitaHistorial(
+    val id: String,
+    val estado: String?,
+    val especialidad: String?,
+    val fecha_solicitada: String?,
+    val hora_asignada: String?,
+    val unidad_medica: String?,
+    val doctor: String?
+)
+
+data class ApiResponsePerfil(
+    val exito: Boolean,
+    val datos: DatosPerfil
+)
+
+data class DatosPerfil(
+    val nombre: String?,
+    val apellido: String?,
+    val dui: String?,
+    val email: String?,
+    val telefono: String?,
+    val num_afiliado: String?,
+    val tipo_sangre: String?,
+    val alergias: String?,
+    val condiciones_cronicas: String?
+)
+
+data class ApiResponseMapa(
+    val exito: Boolean,
+    val datos: List<UnidadMedicaMapa>
+)
+
+data class UnidadMedicaMapa(
+    val id: Int,
+    val nombre: String?,
+    val direccion: String?,
+    val telefono: String?,
+    val latitud: String?,
+    val longitud: String?,
+    val especialidades: List<String>?
+)
+
+data class ApiResponseEspecialidades(
+    val exito: Boolean,
+    val datos: List<Especialidad>
+)
+
+data class Especialidad(
+    val id: Int,
+    val nombre: String?,
+    val descripcion: String?
+)
+
+data class ApiResponseUnidades(
+    val exito: Boolean,
+    val datos: List<UnidadMedicaFiltro>
+)
+
+data class UnidadMedicaFiltro(
+    val id: Int,
+    val nombre: String?,
+    val direccion: String?
+)
+
+data class ApiResponseHorarios(
+    val exito: Boolean,
+    val datos: List<String>
+)

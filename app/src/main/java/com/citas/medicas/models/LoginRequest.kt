@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 //objt enviado
 data class LoginRequest(
-    @SerializedName("email")
-    val email: String,
+    @SerializedName("numAfiliado")
+    val numAfiliado: String,
     @SerializedName("password")
     val password: String,
     @SerializedName("rol")

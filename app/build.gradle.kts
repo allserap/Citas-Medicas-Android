@@ -64,6 +64,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation(libs.androidx.activity)
 
+    // Corrutinas para llamadas asíncronas
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
     // --- DATABASE (Room) ---
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")

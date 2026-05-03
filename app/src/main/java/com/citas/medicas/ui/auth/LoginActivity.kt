@@ -40,13 +40,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.etAfiliado.text.toString()
+            val numAfiliado = binding.etAfiliado.text.toString()
             val pass = binding.etClave.text.toString()
 
-            if (email.isEmpty() || pass.isEmpty()) {
+            if (numAfiliado.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show()
             }else{
-                ejecutarLogin(email, pass)
+                ejecutarLogin(numAfiliado, pass)
             }
         }
     }
@@ -88,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                     with(prefs.edit()) {
                         putString("user_id", user?.id)
                         putString("user_nombre", user?.nombre)
+                        putString("user_afiliado", user?.numafiliado)
                         putInt("user_rol", idRol)
                         apply()
                     }

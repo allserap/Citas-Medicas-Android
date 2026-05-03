@@ -128,6 +128,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvTituloTodasUnidades"
                 android:text="🏢 Todas las Unidades (5)"
                 android:textColor="@color/citas_primary"
                 android:textSize="16sp"
@@ -138,24 +139,8 @@
                 android:id="@+id/rvListaUnidadesMapa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_unidad_mapa" />
-
-<!--            eliminar este linear por que es para datos quemados, solo usar el recycler, borrar el visibility del recycler de aqui arrriba-->
-            <LinearLayout
-                android:id="@+id/llMockUnidadesMapa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include layout="@layout/item_unidad_mapa" />
-
-                <include layout="@layout/item_unidad_mapa" />
-
-                <include layout="@layout/item_unidad_mapa" />
-
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
