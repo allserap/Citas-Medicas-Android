@@ -17,10 +17,7 @@ class HomePacienteActivity : AppCompatActivity() {
 
 
 
-        val btnSolicitar = findViewById<MaterialCardView>(R.id.cvActionSolicitar)
-        val btnMisCitas = findViewById<MaterialCardView>(R.id.cvActionMisCitas)
-        val btnUnidades = findViewById<MaterialCardView>(R.id.cvActionUnidades)
-        val btnPerfil = findViewById<MaterialCardView>(R.id.cvActionPerfil)
+
         val tvVerTodasCitas = findViewById<TextView>(R.id.tvVerTodasCitas)
 
 
@@ -28,21 +25,7 @@ class HomePacienteActivity : AppCompatActivity() {
             startActivity(Intent(this, HistorialCitasActivity::class.java))
         }
 
-        btnSolicitar.setOnClickListener {
-            startActivity(Intent(this, SolicitarCitaActivity::class.java))
-        }
 
-        btnMisCitas.setOnClickListener {
-            startActivity(Intent(this, HistorialCitasActivity::class.java))
-        }
-
-        btnUnidades.setOnClickListener {
-            startActivity(Intent(this, MapaActivity::class.java))
-        }
-
-        btnPerfil.setOnClickListener {
-            startActivity(Intent(this, PerfilActivity::class.java))
-        }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 

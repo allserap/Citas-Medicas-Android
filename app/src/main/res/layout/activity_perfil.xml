@@ -203,6 +203,19 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp"/>
 
+                    <!-- Botón de Editar Perfil -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditarPerfil"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:padding="12dp"
+                        android:text="Editar Perfil"
+                        android:textColor="@color/citas_primary"
+                        app:cornerRadius="8dp"
+                        app:strokeColor="@color/citas_primary" />
+
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Condiciones Crónicas" android:textColor="@color/citas_secondary" android:textSize="12sp"/>
                     <TextView android:id="@+id/tvSaludCronicas" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ninguna registrada" android:textColor="@color/citas_primary" android:textSize="14sp" android:layout_marginBottom="8dp"/>
                     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginBottom="8dp"/>
